@@ -1,0 +1,102 @@
+@startuml ListaPOO2026
+title Diagrama de Classes - ListaPOO2026
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam backgroundColor white
+skinparam class {
+  BackgroundColor #FDFBF7
+  BorderColor #5F5E5A
+  ArrowColor #5F5E5A
+  FontSize 13
+}
+skinparam titleFontSize 16
+hide empty members
+
+abstract class Pessoa {
+  - nome : String
+  - endereco : String
+  - telefone : String
+  + Pessoa()
+  + Pessoa(String, String)
+  + Pessoa(String, String, String)
+  + getNome() : String
+  + setNome(String) : void
+  + getEndereco() : String
+  + setEndereco(String) : void
+  + getTelefone() : String
+  + setTelefone(String) : void
+  + toString() : String
+}
+
+class Fornecedor {
+  - valorCredito : double
+  - valorDivida : double
+  + Fornecedor(String, String, String, double, double)
+  + getValorCredito() : double
+  + setValorCredito(double) : void
+  + getValorDivida() : double
+  + setValorDivida(double) : void
+  + obterSaldo() : double
+  + toString() : String
+}
+
+class Empregado {
+  - codigoSetor : int
+  - salarioBase : double
+  - imposto : double
+  + Empregado(String, String, String, int, double, double)
+  + getCodigoSetor() : int
+  + setCodigoSetor(int) : void
+  + getSalarioBase() : double
+  + setSalarioBase(double) : void
+  + getImposto() : double
+  + setImposto(double) : void
+  + calcularSalario() : double
+  + toString() : String
+}
+
+class Administrador {
+  - ajudaDeCusto : double
+  + Administrador(String, String, String, int, double, double, double)
+  + getAjudaDeCusto() : double
+  + setAjudaDeCusto(double) : void
+  + calcularSalario() : double
+  + toString() : String
+}
+
+class Operario {
+  - valorProducao : double
+  - comissao : double
+  + Operario(String, String, String, int, double, double, double, double)
+  + getValorProducao() : double
+  + setValorProducao(double) : void
+  + getComissao() : double
+  + setComissao(double) : void
+  + calcularSalario() : double
+  + toString() : String
+}
+
+class Vendedor {
+  - valorVendas : double
+  - comissao : double
+  + Vendedor(String, String, String, int, double, double, double, double)
+  + getValorVendas() : double
+  + setValorVendas(double) : void
+  + getComissao() : double
+  + setComissao(double) : void
+  + calcularSalario() : double
+  + toString() : String
+}
+
+class Aplicativo {
+  + {static} main(String[] args) : void
+}
+
+Pessoa <|-- Fornecedor
+Pessoa <|-- Empregado
+Empregado <|-- Administrador
+Empregado <|-- Operario
+Empregado <|-- Vendedor
+Aplicativo ..> Pessoa : usa
+
+@enduml
