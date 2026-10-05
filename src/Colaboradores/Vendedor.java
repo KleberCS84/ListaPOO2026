@@ -18,6 +18,20 @@ public class Vendedor extends Empregado {
 		this.setComissao(comissao);
 		
 	}
+	public Vendedor(
+	        String nome,
+	        String endereco,
+	        String telefone,
+	        int codigoSetor,
+	        double salarioBase,
+	        double imposto,
+	        double valorVendas,
+	        double comissao,
+	        String obsExtra){
+	    super(nome,endereco, telefone, codigoSetor, salarioBase, imposto, obsExtra);
+	    this.setValorVendas(valorVendas);
+	    this.setComissao(comissao);
+	}
 
 	public double getValorVendas() {
 		return this.valorVendas;

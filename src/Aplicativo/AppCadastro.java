@@ -1,19 +1,14 @@
 package Aplicativo;
-import Colaboradores.Administrador;
-import Telas.TelaDeCadastroFornecedor;
-import Colaboradores.Empregado;
-import Colaboradores.Fornecedor;
-import Colaboradores.Operario;
-import Colaboradores.Pessoa;
-import Colaboradores.Vendedor;
+
+import Telas.TelaMenu;
 
 public class AppCadastro {
 
 	public static void main(String[] args) {
 		
-		final double taxaImposto = 27;
-		final double comissaoOperario = 10;
-		final double comissaoVendedor = 10;
+		//final double taxaImposto = 27;
+		//final double comissaoOperario = 10;
+		//final double comissaoVendedor = 10;
 			
 		/*Pessoa[] listaDePessoas = {
 			new Fornecedor("Fulano","Rua Street","555-555-555",2000, 1300),
@@ -28,8 +23,9 @@ public class AppCadastro {
 			System.out.println(p);
 		}*/
 		
-		TelaDeCadastroFornecedor teste = new TelaDeCadastroFornecedor();
-		
+		//TelaDeCadastroFornecedor telaFornecedor = new TelaDeCadastroFornecedor();
+		//TelaDeCadastroEmpregado telaEmpregado = new TelaDeCadastroEmpregado();
+		new TelaMenu();
 	}
 
 }

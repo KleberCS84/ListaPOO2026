@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Date;
 
-import Colaboradores.*;
+import Colaboradores.Fornecedor;
 
 
 public class TelaDeCadastroFornecedor extends JFrame implements ActionListener{
@@ -23,8 +23,8 @@ public class TelaDeCadastroFornecedor extends JFrame implements ActionListener{
 	private JTextField tValorCredito;
 	private JLabel valorDivida;
 	private JTextField tValorDivida;
-	private JLabel obsExtras;
-	private JTextArea tObsExtras;
+	private JLabel obsExtra;
+	private JTextArea tObsExtra;
 	private JCheckBox termoDeDeclaracao;
 	private JLabel termoDeConcetimento;
 	private JRadioButton rbSimConcetimento;
@@ -32,6 +32,9 @@ public class TelaDeCadastroFornecedor extends JFrame implements ActionListener{
 	private ButtonGroup bgConcetimento;
 	private JButton bSubmeter;
 	private JButton bReset;
+	private JLabel mensagem;
+	
+	private JTextArea mostrador;
 	
 	private Fornecedor fornecedor;
 	
@@ -42,8 +45,8 @@ public class TelaDeCadastroFornecedor extends JFrame implements ActionListener{
 		final int inicioForm = 30;
 		
 		setTitle("FICHA DE REGISTRO");
-		setBounds (300, 90, 400, 600);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setBounds (700, 10, 720, 720);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setResizable(false);
 		
 		container = getContentPane();
@@ -91,9 +94,9 @@ public class TelaDeCadastroFornecedor extends JFrame implements ActionListener{
 		tTelefone.setLocation(recuoField,inicioForm+espacamento*3);
 		container.add(tTelefone);
 		
-		valorCredito = new JLabel("Crédito");
+		valorCredito = new JLabel("Crédito (R$)");
 		valorCredito.setFont(new Font("Arial", Font.PLAIN, 20));
-		valorCredito.setSize(100,20);
+		valorCredito.setSize(120,20);
 		valorCredito.setLocation(recuoLabel,inicioForm+espacamento*4);
 		container.add(valorCredito);
 		
@@ -103,7 +106,7 @@ public class TelaDeCadastroFornecedor extends JFrame implements ActionListener{
 		tValorCredito.setLocation(recuoField,inicioForm+espacamento*4);
 		container.add(tValorCredito);
 		
-		valorDivida = new JLabel("Dívida");
+		valorDivida = new JLabel("Dívida (R$)");
 		valorDivida.setFont(new Font("Arial", Font.PLAIN, 20));
 		valorDivida.setSize(100,20);
 		valorDivida.setLocation(recuoLabel,inicioForm+espacamento*5);
@@ -115,17 +118,17 @@ public class TelaDeCadastroFornecedor extends JFrame implements ActionListener{
 		tValorDivida.setLocation(recuoField,inicioForm+espacamento*5);
 		container.add(tValorDivida);
 		
-		obsExtras = new JLabel("Observações");
-		obsExtras.setFont(new Font("Arial", Font.PLAIN, 15));
-		obsExtras.setSize(200,20);
-		obsExtras.setLocation(recuoLabel,inicioForm+espacamento*6);
-		container.add(obsExtras);
+		obsExtra = new JLabel("Observações");
+		obsExtra.setFont(new Font("Arial", Font.PLAIN, 15));
+		obsExtra.setSize(200,20);
+		obsExtra.setLocation(recuoLabel,inicioForm+espacamento*6);
+		container.add(obsExtra);
 		
-		tObsExtras = new JTextArea();
-		tObsExtras.setFont(new Font("Arial", Font.PLAIN, 15));
-		tObsExtras.setSize(300,70);
-		tObsExtras.setLocation(recuoLabel,inicioForm+espacamento*7-10);
-		container.add(tObsExtras);
+		tObsExtra = new JTextArea();
+		tObsExtra.setFont(new Font("Arial", Font.PLAIN, 15));
+		tObsExtra.setSize(300,70);
+		tObsExtra.setLocation(recuoLabel,inicioForm+espacamento*7-10);
+		container.add(tObsExtra);
 		
 		termoDeDeclaracao = new JCheckBox("Declaro verdadeiras as informações");
 		termoDeDeclaracao.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -162,13 +165,27 @@ public class TelaDeCadastroFornecedor extends JFrame implements ActionListener{
 		bSubmeter.setFont(new Font("Arial", Font.BOLD, 10));
 		bSubmeter.setSize(100, 20);
 		bSubmeter.setLocation(recuoLabel, inicioForm+espacamento*11+40);
+		bSubmeter.addActionListener(this);
 		container.add(bSubmeter);
 		
 		bReset = new JButton("LIMPAR");
 		bReset.setFont(new Font("Arial", Font.BOLD, 10));
 		bReset.setSize(100,20);
 		bReset.setLocation(220, inicioForm+espacamento*11+40);
+		bReset.addActionListener(this);
 		container.add(bReset);
+		
+		mensagem = new JLabel();
+		mensagem.setFont(new Font("Arial", Font.ITALIC, 15));
+		mensagem.setSize(330, 20);
+		mensagem.setLocation(recuoLabel, espacamento*12+100);
+		container.add(mensagem);
+		
+		mostrador = new JTextArea();
+		mostrador.setFont(new Font("Arial",Font.PLAIN, 15));
+		mostrador.setSize(320, inicioForm+espacamento*11+40);
+		mostrador.setLocation(365, inicioForm);
+		container.add(mostrador);
 		
 		setVisible(true);
 		
@@ -176,7 +193,35 @@ public class TelaDeCadastroFornecedor extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == bSubmeter) {
+			if(termoDeDeclaracao.isSelected()) {
+				if(rbSimConcetimento.isSelected()) {
+					fornecedor = new Fornecedor(tNome.getText(), tEndereco.getText(), tTelefone.getText(), Integer.parseInt(tValorCredito.getText()), Integer.parseInt(tValorDivida.getText()), tObsExtra.getText());
+					mostrador.setText(fornecedor.toString());
+					mensagem.setText("Fornecedor cadastrado com sucesso.");
+					mensagem.setForeground(Color.DARK_GRAY);
+				} else {
+					mensagem.setText("Aceite os termos e condições.");
+					mensagem.setForeground(Color.RED);
+				}
+			} else {
+				mensagem.setText("Marque que as informações são verdadeiras.");
+				mensagem.setForeground(Color.RED);
+			}
+			
+		}else if (e.getSource() == bReset) {
+			String def = "";
+			tNome.setText(def);
+			tEndereco.setText(def);
+			tTelefone.setText(def);
+			tValorCredito.setText(def);
+			tValorDivida.setText(def);
+			tObsExtra.setText(def);
+			termoDeDeclaracao.setSelected(false);
+			rbNaoConcetimento.setSelected(true);
+			mensagem.setText(def);
+			
+		}
 		
 	}
 	

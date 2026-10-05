@@ -16,6 +16,19 @@ public class Administrador extends Empregado {
 		this.setAjudaDeCusto(ajudaDeCusto);
 		
 	}
+	public Administrador(
+	        String nome, 
+	        String endereco, 
+	        String telefone, 
+	        int codigoSetor, 
+	        double salarioBase, 
+	        double imposto, 
+	        double ajudaDeCusto,
+	        String obsExtra
+	        ) {
+	    super(nome, endereco, telefone, codigoSetor, salarioBase, imposto, obsExtra);
+	    this.setAjudaDeCusto(ajudaDeCusto);
+	}
 	
 	public double getAjudaDeCusto() {
 		return this.ajudaDeCusto;

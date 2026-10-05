@@ -17,6 +17,20 @@ public class Operario extends Empregado {
 		this.setValorProducao(valorProducao);
 		this.setComissao(comissao);
 	}
+	public Operario(
+	        String nome, 
+	        String endereco, 
+	        String telefone, 
+	        int codigoSetor, 
+	        double salarioBase, 
+	        double imposto, 
+	        double valorProducao, 
+	        double comissao,
+	        String obsExtra) {
+	    super(nome, endereco, telefone, codigoSetor, salarioBase, imposto, obsExtra);
+	    this.setValorProducao(valorProducao);
+	    this.setComissao(comissao);
+	}
 	
 	public double getValorProducao() {
 		return this.valorProducao;

@@ -3,11 +3,19 @@ package Colaboradores;
 public class Fornecedor extends Pessoa {
 	private double valorCredito;
 	private double valorDivida;	
+	private String obsExtra;
 	public Fornecedor(String nome, String endereco, String telefone, double valorCredito, double valorDivida) {
 		super(nome, endereco, telefone);
 		this.setValorCredito(valorCredito);
 		this.setValorDivida(valorDivida);
 		
+	}
+	
+	public Fornecedor(String nome, String endereco, String telefone, double valorCredito, double valorDivida, String obsExtra) {
+		super(nome, endereco, telefone);
+		this.setValorCredito(valorCredito);
+		this.setValorDivida(valorDivida);
+		this.setObsExtra(obsExtra);		
 	}
 
 	
@@ -25,6 +33,13 @@ public class Fornecedor extends Pessoa {
 		this.valorDivida = valorDivida;
 	}
 	
+	public String getObsExtra() {
+		return this.obsExtra;
+	}
+	public void setObsExtra(String obsExtra) {
+		this.obsExtra = obsExtra;
+	}
+	
 	public double obterSaldo() {
 		return this.getValorCredito() - this.getValorDivida();
 	}
@@ -34,7 +49,8 @@ public class Fornecedor extends Pessoa {
 		return super.toString() + 
 				"\nCredito: "+ this.getValorCredito() + 
 				"\nDívida: "+ this.getValorDivida()+
-				"\nSaldo: "+ obterSaldo();
+				"\nSaldo: "+ obterSaldo()+
+				"\nObservação: "+ this.obsExtra;
 	}
 
 }

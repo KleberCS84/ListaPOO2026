@@ -4,12 +4,22 @@ public class Empregado extends Pessoa {
 	private int codigoSetor;
 	private double salarioBase;
 	private double imposto;
+	private String obsExtra;
 	
 	public Empregado(String nome, String endereco, String telefone, int codigoSetor, double salarioBase, double imposto) {
 		super(nome,endereco, telefone);
 		this.setCodigoSetor(codigoSetor);
 		this.setSalarioBase(salarioBase);
 		this.setImposto(imposto);
+		
+	}
+	
+	public Empregado(String nome, String endereco, String telefone, int codigoSetor, double salarioBase, double imposto, String obsExtra) {
+		super(nome,endereco, telefone);
+		this.setCodigoSetor(codigoSetor);
+		this.setSalarioBase(salarioBase);
+		this.setImposto(imposto);
+		this.setObsExtra(obsExtra);
 		
 	}
 	
@@ -34,6 +44,13 @@ public class Empregado extends Pessoa {
 		this.imposto = imposto;
 	}
 	
+	public String getObsExtra() {
+		return this.obsExtra;
+	}
+	public void setObsExtra(String obsExtra) {
+		this.obsExtra = obsExtra;
+	}
+	
 	public double calcularSalario() {
 		return this.getSalarioBase() - (this.getImposto() / 100 * this.getSalarioBase());
 	}
@@ -44,7 +61,8 @@ public class Empregado extends Pessoa {
 				"\nCodigo Setor: "+this.getCodigoSetor()+
 				"\nSalario Base: "+this.getSalarioBase()+
 				"\nImpostos: "+ this.getImposto()+"%"+
-				"\nSalario Líquido: "+ calcularSalario();
+				"\nSalario Líquido: "+ calcularSalario()+
+				"\nObservação: "+ this.obsExtra;
 	}
 
 }
